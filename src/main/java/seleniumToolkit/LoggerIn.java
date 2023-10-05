@@ -19,9 +19,32 @@ public class LoggerIn
         this.passwordInput = passwordInput;
     }
 
-    public void action()
+    public LoggerIn action()
     {
+        Basics basics = new Basics(driver);
 
+        if (basics.isExist(usernameElement) && basics.isExist(passwordElement))
+        {
+            WebElement usernamePrompt = driver.findElement(usernameElement);
+            WebElement passwordPrompt = driver.findElement(passwordElement);
+
+            usernamePrompt.sendKeys(usernameInput);
+            passwordPrompt.sendKeys(passwordInput);
+        }
+
+        return this;
+    }
+
+    public void click(By location)
+    {
+        Basics basics = new Basics(driver);
+
+        if (basics.isExist(location))
+        {
+            new Wait(driver).stop(1);
+            WebElement element = driver.findElement(location);
+            element.click();
+        }
     }
 
 }
